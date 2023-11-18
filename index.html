@@ -31,6 +31,20 @@
             margin: 20px;
             position: relative;
             background: conic-gradient(from 90deg, #0ff 0%, #00f 12.5%, #80f 25%, #f0f 37.5%, #f00 50%, #ff0 62.5%, #8f0 75%, #0f0 88%, #0ff 100%);
+            cursor: cell !important;
+        }
+
+        #color_space p, #value {
+          margin: 0;
+          text-shadow: 0 0 4px black;
+          z-index: 777;
+          position: absolute;
+        }
+
+        #value {
+          margin: 10px;
+          top: 0;
+          font-size: 32px;
         }
 
         #images, #color_space {
@@ -47,14 +61,10 @@
     </style>
 </head>
 <body>
-
+<div id="value">Channel 1: 0, Channel 2: 0</div>
 <div id="images">
-    <!-- Add your image elements here with style attribute -->
-    <!-- The default visible image is set to 0_0.png -->
-    <img id="image" src="0_0.png" alt="0_0" style="display: block;">
-    <!-- Add other image elements with display: none; -->
+    <img id="image" src="0_0.jpg" alt="0_0" style="display: block;">
 </div>
-
 <div style="display: flex; justify-content: center; align-items: center">
     LIME
 </div>
@@ -63,7 +73,10 @@
     RED
   </div>
   <div id="color_space">
-    
+    <p style="position:absolute;left:10px;top:50%;transform:translateY(-0.6em);">-1</p>
+    <p style="position:absolute;right:10px;top:50%;transform:translateY(-0.6em);">+1</p>
+    <p style="position:absolute;top:10px;left:50%;transform:translateX(-50%);">+1</p>
+    <p style="position:absolute;bottom:10px;left:50%;transform:translateX(-50%);">-1</p>
   </div>
   <div>
     CYAN
@@ -91,7 +104,9 @@
         const c = Math.round(percentX * 5) * 2;
         const g = -Math.round(percentY * 5) * 2;
 
-        document.getElementById("image").src = `${c}_${g}.png`;
+        document.getElementById("value").innerHTML = `Channel 1: ${(c > 0 ? "+" : "") + c/10}, Channel 2: ${(g > 0 ? "+" : "") + g/10}`
+
+        document.getElementById("image").src = `${c}_${g}.jpg`;
     }
 
 
